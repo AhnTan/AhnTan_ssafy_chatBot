@@ -21,7 +21,7 @@
 다음은 처음 ChatBot을 호출하여 응답이 시작되는 첫 화면 입니다.
 
 <div>
- <img width="400" height="400" src="https://user-images.githubusercontent.com/30898520/50325130-7321c580-0526-11e9-87e2-d07e65a703fc.PNG">
+ <img width="400" height="250" src="https://user-images.githubusercontent.com/30898520/50325130-7321c580-0526-11e9-87e2-d07e65a703fc.PNG">
 </div>
 
    
