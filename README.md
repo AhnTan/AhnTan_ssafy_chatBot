@@ -1,6 +1,6 @@
 <div>
 
-# <img width="70" src="https://user-images.githubusercontent.com/30898520/50325037-cd6e5680-0525-11e9-8bbe-ac5014ab9c33.jpg"> FoodFigther_ChatBot
+# <img width="60" src="https://user-images.githubusercontent.com/30898520/50325037-cd6e5680-0525-11e9-8bbe-ac5014ab9c33.jpg"> FoodFigther_ChatBot
 
 ##  Flask를 이용한 Slack_ChatBot (make with [huisam](https://github.com/huisam))
 
