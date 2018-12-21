@@ -19,27 +19,28 @@
    
 ### 0. 첫 시작
 
-기본적 사용법으로는 @"봇 이름" (명령) 입니다.
-다음은 처음 ChatBot을 호출하는 모습입니다.
+#### 기본적 사용법으로는 @"봇 이름" (명령) 입니다.
+다음은 처음 ChatBot을 호출하여 응답이 시작되는 첫 화면 입니다.
 
+<div>
  <img width="600" height="400" src="https://user-images.githubusercontent.com/30898520/50325130-7321c580-0526-11e9-87e2-d07e65a703fc.PNG">
-
-<div>
- <img width="600" height="400" src="https://user-images.githubusercontent.com/30898520/46242881-c6ddb080-c408-11e8-8d8c-50810e4b0774.png">
 </div>
 
+| name | number |
+|------|--------|
+|안형우| 01     |
+|ssafy| 02      |
    
-### 1. 권한
-<div>
-  <img width="200" src="https://user-images.githubusercontent.com/30898520/46005628-a6ec7b00-c0f0-11e8-897e-8e2a45037760.jpg">  
-  <img width="200" src="https://user-images.githubusercontent.com/30898520/46005896-3db93780-c0f1-11e8-9b2c-6574096ef0ae.png">  
-</div>
+### 1. 음식
 
-먼저, Deeptector_Android_Client 최초 실행 시 외부저장소에 대한 권한 요청을 하게됩니다.   
-   
-이 권한을 허가 해주셔야 사용하실 수 있으시며, 이 권한은 후에 감지된 영상을 저장 및 열람 할 수 있게 해주는 권한이므로     
-안심하셔도 됩니다.
-권한이 확인 된 후에는 우측의 화면과 같은 홈화면을 만나실 수 있습니다.
+봇을 호출 한 뒤 첫번째로 음식에 대해 명령을 내리는 모습입니다.
+
+지역은 서울을 기준으로 살고있는 지역(구)에 대한 입력을 받습니다.
+
+<div>
+  <img width="200" src="https://user-images.githubusercontent.com/30898520/50325259-183c9e00-0527-11e9-8a8c-73c3f305f7e9.PNG">
+
+</div>
    
 <br/><br/>
 ### 2. 지난 영상 확인 및 다운로드
