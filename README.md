@@ -13,8 +13,6 @@
 * 대화  
 
 <br/><br/>
-
-   
 ## 사용법
    
 ### 0. 첫 시작
@@ -26,21 +24,20 @@
  <img width="600" height="400" src="https://user-images.githubusercontent.com/30898520/50325130-7321c580-0526-11e9-87e2-d07e65a703fc.PNG">
 </div>
 
-| name | number |
-|------|--------|
-|안형우| 01     |
-|ssafy| 02      |
    
 ### 1. 음식
 
 봇을 호출 한 뒤 첫번째로 음식에 대해 명령을 내리는 모습입니다.
 
 지역은 서울을 기준으로 살고있는 지역(구)에 대한 입력을 받습니다.
+그리고 그 지역에 대한 음식점에 대한 정보를 셀레니움을 통해 크롤링하여 읽어 옵니다.
 
 <div>
   <img width="200" src="https://user-images.githubusercontent.com/30898520/50325259-183c9e00-0527-11e9-8a8c-73c3f305f7e9.PNG">
-
+  <img width="200" src="https://user-images.githubusercontent.com/30898520/50325302-63ef4780-0527-11e9-967d-ff18e8276a28.PNG">
 </div>
+
+후에 
    
 <br/><br/>
 ### 2. 지난 영상 확인 및 다운로드
