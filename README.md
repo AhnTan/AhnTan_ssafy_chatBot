@@ -37,7 +37,27 @@
   <img width="400" src="https://user-images.githubusercontent.com/30898520/50325302-63ef4780-0527-11e9-967d-ff18e8276a28.PNG">
 </div>
 
-후에 
+셀레니움을 통한 지도 관련 uri를 가져오는 코드입니다.
+
+def selenium_reader(address):
+    options = webdriver.ChromeOptions()
+    options.add_argument('headless')
+    options.add_argument('window-size=1920x1080')
+    options.add_argument("--disable-gpu")
+
+
+    driver = webdriver.Chrome("C:\\Users\\student\\Downloads\\chromedriver_win32\\chromedriver.exe", chrome_options=options)
+
+    # url에 접근한다
+    driver.get('https://www.google.com/maps/')
+    print(address)
+    driver.find_element_by_id('searchboxinput').send_keys(address)
+    driver.find_element_by_id("searchboxinput").send_keys(Keys.ENTER)
+
+    time.sleep(3)
+
+    print(driver.current_url)
+    return driver.current_url
    
 <br/><br/>
 ### 2. 지난 영상 확인 및 다운로드
