@@ -12,20 +12,18 @@
 * 날씨
 * 대화  
 
-해당 탐지기에 특정 행동이나 상황이 감지 되면 어플리케이션을 통해 알림(notification)을 실시간으로 확인 할 수 있습니다.   
-또한 감지와 동시에 이루어지는 영상을 실시간으로 지켜 볼 수 있으며, 지난 영상들을 서버를 통해 다운받아 다시 확인 해보실수 있습니다.     
-  
-웹 형태로 제공되는 클라이언트는 [**Deeptector_React**](https://github.com/Deeptector/Deeptector_React)를 참고 해주시면 되겠습니다.   
-    
-현재 이 Repository는 **안드로이드 클라이언트** 부분입니다.  
 <br/><br/>
 
    
 ## 사용법
    
-### 0. Android-studio에서 실행 시 (NDK 설치필요)  
-##### apk파일이 아닌 Studio에서 실행시 NDK 툴을 설치해주셔야 합니다   
-Tools -> Android -> SDK Manager 로 들어가셔서 다음 화면과 같이 NDK 설치 여부를 확인해주십시오.
+### 0. 첫 시작
+
+기본적 사용법으로는 @"봇 이름" (명령) 입니다.
+다음은 처음 ChatBot을 호출하는 모습입니다.
+
+ <img width="600" height="400" src="https://user-images.githubusercontent.com/30898520/50325130-7321c580-0526-11e9-87e2-d07e65a703fc.PNG">
+
 <div>
  <img width="600" height="400" src="https://user-images.githubusercontent.com/30898520/46242881-c6ddb080-c408-11e8-8d8c-50810e4b0774.png">
 </div>
