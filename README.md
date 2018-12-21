@@ -39,12 +39,11 @@
 
 셀레니움을 통한 지도 관련 uri를 가져오는 코드입니다.
 
-def selenium_reader(address):
+    def selenium_reader(address):
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
     options.add_argument('window-size=1920x1080')
     options.add_argument("--disable-gpu")
-
 
     driver = webdriver.Chrome("C:\\Users\\student\\Downloads\\chromedriver_win32\\chromedriver.exe", chrome_options=options)
 
