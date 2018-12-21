@@ -2,8 +2,8 @@
 
 # FoodFigther_ChatBot
 
-## Flask를 이용한 Slack_ChatBot
-### (make with [huisam](https://github.com/huisam))
+## Flask를 이용한 Slack_ChatBot ### (make with [huisam](https://github.com/huisam))
+
 
 <img width="100" src="https://user-images.githubusercontent.com/30898520/46004540-22006200-c0ee-11e8-82fe-8022210de98e.jpg">
 
