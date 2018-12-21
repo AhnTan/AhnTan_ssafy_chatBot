@@ -59,10 +59,16 @@
     return driver.current_url
    
 <br/><br/>
-### 2. 지난 영상 확인 및 다운로드
+
+
+### 2. 날씨
+
+다음은 날씨에 관련하여 ChatBot에게 오늘 날씨를 물어보는 모습입니다.
+위 음식 질문과 같이 지역(구) 입력을 통하여 날씨 api를 이용해 결과를 받아 볼 수 있습니다. 
 <div>
-  <img width="200" src="https://user-images.githubusercontent.com/30898520/46005889-3abe4700-c0f1-11e8-97f9-d843bd1e6a94.png">
-  <img width="200" src="https://user-images.githubusercontent.com/30898520/46006570-cedcde00-c0f2-11e8-80ef-4ac09cdcc73e.jpg">
+	
+  <img width="400" src="https://user-images.githubusercontent.com/30898520/50325591-1c69bb00-0529-11e9-8c26-d0c9524f9374.PNG">
+
 </div>
 
 #### 사용자는 서버에 녹화 저장된 동영상 목록들을 현재 이 화면에서 확인해보실 수 있습니다. 
@@ -73,8 +79,8 @@
 <br/><br/>
 ### 3. 실시간 영상 수신
 <div>
-   <img width="200" src="https://user-images.githubusercontent.com/30898520/46006795-51fe3400-c0f3-11e8-9736-7a1b86038b64.png">
-   <img width="200" src="https://user-images.githubusercontent.com/30898520/46009264-fedbaf80-c0f9-11e8-97f7-561511c61795.png">
+   <img width="400" src="https://user-images.githubusercontent.com/30898520/46006795-51fe3400-c0f3-11e8-9736-7a1b86038b64.png">
+   <img width="400" src="https://user-images.githubusercontent.com/30898520/46009264-fedbaf80-c0f9-11e8-97f7-561511c61795.png">
 </div>
 
 #### 사용자는 현재 촬영 되고있는 영상을 실시간으로 확인 해보실 수 있습니다.  
