@@ -12,9 +12,8 @@
 * 날씨
 * 대화  
 
-<br/><br/>
+<br/>
 ## 사용법
-   
 ### 0. 첫 시작
 
 #### 기본적 사용법으로는 @"봇 이름" (명령) 입니다.
@@ -27,7 +26,7 @@
    
 ### 1. 음식
 
-봇을 호출 한 뒤 첫번째로 음식에 대해 명령을 내리는 모습입니다.
+>* 봇을 호출 한 뒤 첫번째로 음식에 대해 명령을 내리는 모습입니다.
 
 지역은 서울을 기준으로 살고있는 지역(구)에 대한 입력을 받습니다.
 그리고 그 지역에 대한 음식점에 대한 정보를 셀레니움을 통해 크롤링하여 읽어 옵니다.
@@ -40,22 +39,22 @@
 셀레니움을 통한 지도 관련 uri를 가져오는 코드입니다.
 
     def selenium_reader(address):
-    options = webdriver.ChromeOptions()
-    options.add_argument('headless')
-    options.add_argument('window-size=1920x1080')
-    options.add_argument("--disable-gpu")
+    	options = webdriver.ChromeOptions()
+    	options.add_argument('headless')
+    	options.add_argument('window-size=1920x1080')
+    	options.add_argument("--disable-gpu")
 
-    driver = webdriver.Chrome("C:\\Users\\student\\Downloads\\chromedriver_win32\\chromedriver.exe", chrome_options=options)
+    	driver = webdriver.Chrome("C:\\Users\\student\\Downloads\\chromedriver_win32\\chromedriver.exe", chrome_options=options)
 
-    # url에 접근한다
-    driver.get('https://www.google.com/maps/')
-    print(address)
-    driver.find_element_by_id('searchboxinput').send_keys(address)
-    driver.find_element_by_id("searchboxinput").send_keys(Keys.ENTER)
+    	# url에 접근한다
+    	driver.get('https://www.google.com/maps/')
+    	print(address)
+    	driver.find_element_by_id('searchboxinput').send_keys(address)
+    	driver.find_element_by_id("searchboxinput").send_keys(Keys.ENTER)
 
-    time.sleep(3)
+    	time.sleep(3)
 
-    print(driver.current_url)
+    	print(driver.current_url)
     return driver.current_url
    
 <br/><br/>
@@ -63,12 +62,13 @@
 
 ### 2. 날씨
 
-다음은 날씨에 관련하여 ChatBot에게 오늘 날씨를 물어보는 모습입니다.    
-위 음식 질문과 같이 지역(구) 입력을 통하여 날씨 api를 이용해 결과를 받아 볼 수 있습니다. 
+>* 다음은 날씨에 관련하여 ChatBot에게 오늘 날씨를 물어보는 모습입니다.    
+>* 위 음식 질문과 같이 지역(구) 입력을 통하여 날씨 api를 이용해 결과를 받아 볼 수 있습니다. 
 <div>
 	
   <img width="400" src="https://user-images.githubusercontent.com/30898520/50325591-1c69bb00-0529-11e9-8c26-d0c9524f9374.PNG">
-
+  <img width="400" src="https://user-images.githubusercontent.com/30898520/50325731-dc570800-0529-11e9-8b11-56723bb48124.PNG">
+  
 </div>
 
 #### 사용자는 서버에 녹화 저장된 동영상 목록들을 현재 이 화면에서 확인해보실 수 있습니다. 
