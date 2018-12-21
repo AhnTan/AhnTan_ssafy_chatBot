@@ -33,8 +33,8 @@
 그리고 그 지역에 대한 음식점에 대한 정보를 셀레니움을 통해 크롤링하여 읽어 옵니다.
 
 <div>
-  <img width="200" src="https://user-images.githubusercontent.com/30898520/50325259-183c9e00-0527-11e9-8a8c-73c3f305f7e9.PNG">
-  <img width="200" src="https://user-images.githubusercontent.com/30898520/50325302-63ef4780-0527-11e9-967d-ff18e8276a28.PNG">
+  <img width="500" src="https://user-images.githubusercontent.com/30898520/50325259-183c9e00-0527-11e9-8a8c-73c3f305f7e9.PNG">
+  <img width="500" src="https://user-images.githubusercontent.com/30898520/50325302-63ef4780-0527-11e9-967d-ff18e8276a28.PNG">
 </div>
 
 후에 
