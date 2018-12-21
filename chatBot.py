@@ -1,20 +1,24 @@
-Python 3.5.1 (v3.5.1:37a07cee5969, Dec  6 2015, 01:54:25) [MSC v.1900 64 bit (AMD64)] on win32
-Type "copyright", "credits" or "license()" for more information.
->>>  # -*- coding: utf-8 -*-
-import json
-import csv
-import re
-import urllib.request
-import slacker
-
+# -*- coding: utf-8 -*-
+from selenium.webdriver.common.keys import Keys
+from selenium import webdriver
 from bs4 import BeautifulSoup
 from slackclient import SlackClient
 from flask import Flask, request, make_response, render_template
 from slacker import Slacker
+from threading import Thread
+
+import multiprocessing as mp
+import json
+import csv
+import re
+import urllib.request
+import time
+import random
+
 
 app = Flask(__name__)
 
-slack_token = "xoxb-505014660117-507419645299-7ZgXFi1QWfQAAyQ2pDPSKMQq"
+slack_token = "xoxb-505014660117-507419645299-zMBVKHgG90j36oiJWVcIm53r"
 slack_client_id = "505014660117.507523199394"
 slack_client_secret = "1f7b3a351ceeab9ce32d46c841358eb4"
 slack_verification = "IamWoSTzSfYxoPC6LJmrPDLM"
@@ -27,12 +31,12 @@ seoul_region = {'wrong': 'wrong', '강남': '09680660', '강동': '09740110', '�
             '양구': '01800310', '가평': '02820250', '과천': '02290103', '광명': '02210107', '광주': '02610101', '구리': '02310101',
                 '군포': '02410620', '김포': '02570105'}
 
-flag = {'시작': False, '음식': False, '날씨': False}
+flag = {'시작': False, '음식': False, '날씨': False, '대화': False}
 channel_name = ['#slackbot-project', '#foodfight_bot_test']
 
 
 def slack_notify(text=None, channel=channel_name[1], username='FoodFightbot', attachments=None):
-    token = 'xoxb-505014660117-507419645299-7ZgXFi1QWfQAAyQ2pDPSKMQq' #토근값은 공개저장소에 공개되지 않도록 주의
+    token = 'xoxb-505014660117-507419645299-zMBVKHgG90j36oiJWVcIm53r' #토근값은 공개저장소에 공개되지 않도록 주의
     slack = Slacker(token)
     slack.chat.post_message(text=text, channel=channel, username=username, attachments=attachments, as_user=True)
 
@@ -55,6 +59,7 @@ def flag_false():
         if not title == '시작':
             flag[title] = False
 
+
 def selenium_reader(address):
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
@@ -62,64 +67,71 @@ def selenium_reader(address):
     options.add_argument("--disable-gpu")
 
 
-    driver = webdriver.Chrome('E:\Download\chromedriver.exe', chrome_options=options)
+    driver = webdriver.Chrome("C:\\Users\\student\\Downloads\\chromedriver_win32\\chromedriver.exe", chrome_options=options)
 
     # url에 접근한다
     driver.get('https://www.google.com/maps/')
-
-    print(a)
+    print(address)
     driver.find_element_by_id('searchboxinput').send_keys(address)
     driver.find_element_by_id("searchboxinput").send_keys(Keys.ENTER)
 
     time.sleep(3)
 
     print(driver.current_url)
-    return drvier.current_url
+    return driver.current_url
+
 
 def _info_reader(text):
     text_s = text.split(" ")[1]
-    
     if text_s.isalpha():
         info_s = []
-        with open("food.csv") as file:
+        with open(file="food.csv", mode="r", encoding="utf-8") as file:
             reader = csv.reader(file, delimiter=',')
             local_ = "서울특별시 " + text.split(" ")[1]
-        
+            print(str(reader))
             for row in reader:
                 if row[6].startswith(local_):
                     try:
                         info = {
-                            'name' : row[3],
-                            'x_' : row[4],
-                            'y_' : row[5],
-                            'address' : row[6],
-                            'ph' : row[7]
-                
+                            'name': row[3],
+                            'x_': row[4],
+                            'y_': row[5],
+                            'address': row[6],
+                            'ph': row[7]
+
                         }
                     except:
                         pass
-                    info_s.append(info)    
+                    info_s.append(info)
         result = []
         str_ = ""
+
         for j in range(0, 9):
-            #address = selenium_reader(text.split(" ")[1] + " " + info_s[j]["name"])
-            str_ = "┌----------------------------------------------------------------------┐\n" + "▶ 상호명 : " + info_s[j]["name"] + "\n" + "▶ 위치 : " + info_s[j]["address"] + "\n" + "▶ P.H : " + info_s[j]["ph"] + "\n" + "▶ 지도 : " + selenium_reader(text.split(" ")[1] + " " + info_s[j]["name"]) + "\n" + "└----------------------------------------------------------------------┘\n"
-            if j==0:
-                attach = make_attachment(fallback="~.~", pretext="★" + text.split(" ")[1] + " 안심먹거리 업소" + "★", text=str_, title= text + " 검색 결과 입니다")
+            str_ = "┌----------------------------------------------------------------------┐\n" + ":arrow_forward: 상호명 : " + \
+                   info_s[j]["name"] + "\n" + ":arrow_forward: 위치 : " + info_s[j][
+                       "address"] + "\n" + ":arrow_forward: P.H : " + info_s[j][
+                       "ph"] + "\n" + ":arrow_forward: 지도 : " + selenium_reader(text.split(" ")[1] + " " + info_s[j][
+                "name"]) + "\n" + "└----------------------------------------------------------------------┘\n"
+            if j==0 :
+                attach = make_attachment(fallback="~.~", pretext="★" + text.split(" ")[1] + " 안심먹거리 업소" + "★",
+                                         text=str_,title=text + " 검색 결과 입니다")
                 slack_notify(attachments=attach)
-            else :
-                attach = make_attachment(fallback="~.~", text=str_, )
+
+            else:
+                attach = make_attachment(fallback="~.~",text=str_,)
                 slack_notify(attachments=attach)
         result = u''.join(str_)
-        
+
         return result
 
 
 def select_food(text):
-    result = _info_reader(text)
-    
+    _info_reader(text)
     flag_false()
-    pass
+    attach = make_attachment(fallback="처음 단계로 돌아가요", pretext="We're going to main event",
+                             text="원하시는 서비스를 말씀해주세요\n① 음식\n② 날씨\n③ 나랑 대화"
+                             , title="다시 골라주세요!!")
+    slack_notify(attachments=attach)
 
 
 def detect_region(text):
@@ -209,11 +221,46 @@ def select_weather(text):
 
         keyword = '┌─────────────┐\n' + '│ ' + area + '\t\t│\n' + '│ 시간 : ' + time + sign['time'] + '  \t\t\t\t│' + \
                   '\n│ 기온 : ' + degree + sign['degree'] + '\t\t\t\t\t│\n│ 강수확률 : ' + raining + sign['percent'] + \
-                  '   \t\t│' + '\n│ ' + '미세먼지 : ' + dust + '   \t\t│' '\n└─────────────┘'
+                  '     \t\t│' + '\n│ ' + '미세먼지 : ' + dust + '   \t\t│' '\n└─────────────┘' + '\n□ 더 많은 정보를 원하신다면? □\n' + url
+        attach = make_attachment(fallback="날씨궁금궁금궁금", pretext="Here is your area weather", text=keyword
+                                 , title="■ 당신의 기상정보 나왔습니다 ■", image_url="https://ssl.pstatic.net/static/weather/images/w_icon/w_t01.gif")
+        slack_notify(attachments=attach)
         flag_false()
-        return keyword
+        attach = make_attachment(fallback="처음 단계로 돌아가요", pretext="We're going to main event",
+                                 text="원하시는 서비스를 말씀해주세요\n① 음식\n② 날씨\n③ 나랑 대화"
+                                 , title="다시 골라주세요!!")
+        slack_notify(attachments=attach)
+
     else:
-        return "[날씨]\n위치를 잘못 알려줬어ㅠㅠ 다시 알려조"
+        attach = make_attachment(fallback="날씨 단계로 돌아가요", pretext="We're going to weather event",
+                                 text="날씨 지역이 어떻게 되시나요?"
+                                 , title="다시 입력해 주세요!!")
+        slack_notify(attachments=attach)
+
+
+def conversation_with_bot(text):
+    if '그만' in text:
+        flag['대화'] = False
+        attach = make_attachment(fallback="안녕~~", pretext="돌아간다아아~", text="즐거웠어\n① 음식\n② 날씨\n③ 나랑 대화"
+                                 , title="ㅜ.ㅜ")
+        slack_notify(attachments=attach)
+    else:
+        idx = random.randrange(0,7)
+        text = ["나는 서울을 꿰고 있는 푸프야!!", "에이 나 너 싫어졌어", "흥칫뿡!!!", "아몬드가 죽으면?\n다이아~몬드~~~",
+            "★ssafy 만세★", "1010101010100000011010"]
+        attach = make_attachment(fallback="헤헤 *-*", pretext="푸드파이터의 답변 :", text='=======================\n돌아가고 싶으면 [그만]을 외쳐줘'
+                                 , title=text[idx])
+        slack_notify(attachments=attach)
+
+
+def conversation_main(text):
+    if flag['대화']:
+        conversation_with_bot(text)
+    else:
+        flag['대화'] = True
+        attach = make_attachment(fallback="나랑 놀자아아~!", pretext="★☆★☆★☆★☆★", text="나의 어떤점이 궁금해? *^-^*"
+                                 , title="롸잇~나우★ 핫해~하태~hot해~")
+        slack_notify(attachments=attach)
 
 
 def food_main(text):
@@ -221,23 +268,24 @@ def food_main(text):
         select_food(text)
     else:
         flag['음식'] = True
-
-        "서울안전먹거리 - 살고계신 지역(구)를 입력해주세요"
-
+        attach = make_attachment(fallback="음식을 골라골라", pretext="Where is your area?", text="서울안전먹거리 - 살고계신 지역(구)를 입력해주세요"
+                                 , title="먹고 싶은 지역이 어떻게 되시나요?")
+        slack_notify(attachments=attach)
 
 
 def weather_main(text):
     if flag['날씨']:
-        text = select_weather(text)
+        select_weather(text)
     else:
         flag['날씨'] = True
-        text = "어디 날씨를 보고 싶으세요?"
-    return text
+        attach = make_attachment(fallback="날씨를 골라골라", pretext="Where is your area?", text="▶○○(구/시)로 말씀해주세요!!◀\n\tEx) 강남구\n\t\t  종로구\n\t\t  강남"
+                                 , title="날씨 지역이 어떻게 되시나요?")
+        slack_notify(attachments=attach)
 
 
 def start_chat_bot(text):
     flag['시작'] = True
-    attach = make_attachment(fallback="어서오세요!!", pretext="★Welcome to FoodFightBot★", text="① 음식\n② 날씨"
+    attach = make_attachment(fallback="어서오세요!!", pretext="★Welcome to FoodFightBot★", text="① 음식\n② 날씨\n③ 나랑 대화"
                              ,title="무엇을 알려드릴까요?")
     slack_notify(attachments=attach)
 
@@ -247,34 +295,30 @@ def _crawl_naver_keywords(text):
     # 여기에 함수를 구현해봅시다.
     if "시작" in text and not flag['시작']:
         start_chat_bot(text)
-    elif "음식" in text or "1" in text or flag['음식']:
+        return
+    elif "음식" in text or "1" in text and flag['음식']:
         food_main(text)
+        return
     elif "날씨" in text or "2" in text or flag['날씨']:
         weather_main(text)
+        return
+    elif "대화" in text or "3" in text and flag['대화']:
+        conversation_main(text)
+        return
     else:
         flag_false()
-        attach = make_attachment(fallback="처음 단계로 돌아가요", pretext="We're going to main event", text="원하시는 서비스를 말씀해주세요\n① 음식\n② 날씨"
+        attach = make_attachment(fallback="처음 단계로 돌아가요", pretext="We're going to main event", text="원하시는 서비스를 말씀해주세요\n① 음식\n② 날씨\n③ 나랑 대화"
                              ,title="다시 골라주세요!!")
         slack_notify(attachments=attach)
+        return
 
 
 # 이벤트 핸들하는 함수
 def _event_handler(event_type, slack_event):
     print(slack_event["event"])
 
-    if event_type == "app_mention":
-        channel = slack_event["event"]["channel"]
-        text = slack_event["event"]["text"]
-
-        _crawl_naver_keywords(text)
-
-        return make_response("App mention message has been sent", 200, )
-
-    # ============= Event Type Not Found! ============= #
-    # If the event_type does not have a handler
-    message = "You have not added an event handler for the %s" % event_type
-    # Return a helpful error message
-    return make_response(message, 200, {"X-Slack-No-Retry": 1})
+    event_queue.put(slack_event)
+    return make_response("App mention message has been sent", 200, )
 
 
 @app.route("/listening", methods=["GET", "POST"])
@@ -305,5 +349,25 @@ def index():
     return "<h1>Server is ready.</h1>"
 
 
+def processing_event(queue):
+   while True:
+       # 큐가 비어있지 않은 경우 로직 실행
+       if not queue.empty():
+           slack_event = queue.get()
+
+           # Your Processing Code Block gose to here
+           channel = slack_event["event"]["channel"]
+           text = slack_event["event"]["text"]
+
+           # 챗봇 크롤링 프로세스 로직 함수
+           keywords = _crawl_naver_keywords(text)
+
+
 if __name__ == '__main__':
+    event_queue = mp.Queue()
+
+    p = Thread(target=processing_event, args=(event_queue,))
+    p.start()
+    print("subprocess started")
     app.run('127.0.0.1', port=8080)
+    p.join()
